@@ -1,0 +1,28 @@
+# Ignore everything by default
+*
+
+# Keep this file tracked
+!.gitignore
+
+# Publish set
+!kiosk_backend.py
+!README.md
+!requirements.txt
+!database_setup.sql
+!kiosk_backend_documentation.md
+
+# Keep runtime image assets
+!src/
+!src/**
+
+# Explicitly keep local-only app variants/tests untracked
+kiosk_frontend.py
+cli_backend.py
+test_backend.py
+
+# Common local/dev artifacts
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.vscode/
