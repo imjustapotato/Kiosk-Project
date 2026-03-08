@@ -17,10 +17,12 @@
 
 # Explicitly keep local-only app variants/tests untracked
 kiosk_frontend.py
+kiosk_frontend_qt.py
 cli_backend.py
 test_backend.py
 kiosk_backend_documentation.md
 SMOKE_TEST_REPORT.md
+PHASE_G_CHECKLIST.md
 
 # Common local/dev artifacts
 __pycache__/

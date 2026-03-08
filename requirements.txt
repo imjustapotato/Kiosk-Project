@@ -1,5 +1,4 @@
 mysql-connector-python==8.1.0
-customtkinter==5.2.1
-pillow>=10.0.0
-packaging
-darkdetect
+PySide6==6.10.2
+pillow==12.1.1
+packaging==26.0

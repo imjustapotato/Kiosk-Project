@@ -19,11 +19,13 @@ A Python-based fast food kiosk ordering system with backend database.
 
 ## Project Structure
 ```
-src/(images)
-├── kiosk_backend.py    # Backend classes (Cart, Database)
-├── requirements.txt    # Python dependencies
-├── database_setup.sql  # SQL for initial database setup
-└── README.md          # This file
+kiosk_project/
+├── kiosk_backend.py          # Backend classes (Cart, Database)
+├── requirements.txt          # Pinned Python dependencies
+├── database_setup.sql        # SQL for initial database setup
+├── README.md                 # This file
+└── src/                      # Menu item images + fallback
+	└── no-image.jpg
 ```
 
 ## Setup Instructions
@@ -46,16 +48,24 @@ If you are setting this up using files shared directly:
 
 ### 3. Install Dependencies
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
-### 4. Start Database (XAMPP)
+### 4. Create and Use Virtual Environment (Recommended but optional)
+```bash
+python -m venv .venv
+./.venv/Scripts/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+### 5. Start Database (XAMPP)
 1. Start XAMPP Control Panel
 2. Run XAMPP as Administrator if needed
 3. Click **Start** on MySQL
 4. Click **Admin** or open http://localhost/phpmyadmin
 
-### 5. Preload Database and Menu Items
+### 7. Preload Database and Menu Items
 You can preload data using phpMyAdmin (Web Admin) or terminal SQL import.
 
 #### Option A: Web Admin (phpMyAdmin)
@@ -95,11 +105,6 @@ Each group member should push to their own branch, not directly to `main`.
 git checkout -b <your-branch-name>
 ```
 
-Examples:
-- `feature/customer-ui`
-- `feature/admin-panel`
-- `fix/order-status`
-
 ### Commit and Push Your Updates
 ```bash
 git add .
@@ -112,7 +117,7 @@ After first push with `-u`, next pushes can be:
 git push
 ```
 
-### Sync Your Branch with Main (recommended)
+### Sync Your Branch with Main
 ```bash
 git checkout main
 git pull origin main
@@ -164,9 +169,14 @@ cart = Cart()
 - `order_items`: Items in each order
 
 ## Image Rules
-- Image supports only `jpg/jpeg/png` formats.
-- Selected images are copied into `src/` and saved to the item record.
-- If no image is attached, or if a saved image file is missing, the app uses `src/no-image.jpg`.
+- Image picker allows broad file selection.
+- Selected files are validated as decodable images before being saved for item records.
+- If no image is attached, or a saved image cannot be loaded, the app falls back to `src/no-image.jpg`.
+
+## Troubleshooting
+- If MySQL connection fails, ensure XAMPP MySQL is running and credentials in `kiosk_backend.py` match your local setup.
+- If images are missing, confirm `src/no-image.jpg` exists in project root.
+- If Qt dependencies fail to import, reactivate `.venv` and reinstall with `python -m pip install -r requirements.txt`.
 
 ## License
 Educational project for college coursework.
