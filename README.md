@@ -79,7 +79,7 @@ mysql -u root kiosk_db < database_setup.sql
 
 ### Clone the Repository (first time)
 ```bash
-git clone <your-repo-url>
+git clone <https://github.com/imjustapotato/Kiosk-Project.git>
 cd kiosk_project
 ```
 
