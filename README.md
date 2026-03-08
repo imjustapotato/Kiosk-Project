@@ -133,9 +133,7 @@ The system automatically:
 
 You can also run `database_setup.sql` in phpMyAdmin to manually set up the database.
 
-## Frontend Integration Guide (For Groupmates)
-
-Use `kiosk_backend.py` as the backend contract. Your frontend only needs to call these methods.
+## Frontend Integration Guide
 
 ### 1. Import and initialize
 ```python
