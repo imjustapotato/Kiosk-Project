@@ -99,7 +99,7 @@ git pull origin main
 ```
 
 ### Create and Use Your Own Branch
-Each group member should push to their own branch, not directly to `main`.
+Each should push to each own branch not directly to `main`.
 
 ```bash
 git checkout -b <your-branch-name>
@@ -142,7 +142,7 @@ You can also run `database_setup.sql` in phpMyAdmin to manually set up the datab
 
 ### 1. Import and initialize
 ```python
-from kiosk_backend import Database, Cart, format_php
+from kiosk_backend import Cart, Database, MENU_CATEGORIES, format_php
 
 db = Database()
 cart = Cart()
