@@ -23,6 +23,7 @@ test_backend.py
 kiosk_backend_documentation.md
 SMOKE_TEST_REPORT.md
 PHASE_G_CHECKLIST.md
+mapping.md
 
 # Common local/dev artifacts
 __pycache__/

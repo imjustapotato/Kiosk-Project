@@ -22,6 +22,7 @@ class Cart:
     def __init__(self):
         self.items = []
     
+    # Frontend action: Add to cart button
     def add_item(self, item_id, name, price, quantity):
         item = {
             'item_id': item_id,
@@ -32,16 +33,19 @@ class Cart:
         self.items.append(item)
         print(f"Added {quantity} x {name} (₱{price:.2f} each) to cart")
     
+    # Frontend action: Cart total label/checkout summary
     def get_total(self):
         total = 0.0
         for item in self.items:
             total += float(item['price']) * item['quantity']
         return total
     
+    # Frontend action: Clear cart button
     def clear_cart(self):
         self.items = []
         print("Cart cleared")
     
+    # Frontend action: Remove item from cart button
     def remove_item(self, item_id):
         for i, item in enumerate(self.items):
             if item['item_id'] == item_id:
@@ -51,6 +55,7 @@ class Cart:
         print(f"Item with ID {item_id} not found in cart")
         return False
     
+    # Frontend action: Increase/decrease quantity buttons
     def update_quantity(self, item_id, new_quantity):
         if new_quantity <= 0:
             return self.remove_item(item_id)
@@ -65,12 +70,15 @@ class Cart:
         print(f"Item with ID {item_id} not found in cart")
         return False
     
+    # Frontend action: Read cart items before checkout/render
     def get_items(self):
         return self.items.copy()
     
+    # Frontend action: Cart badge/count indicator
     def get_item_count(self):
         return sum(item['quantity'] for item in self.items)
     
+    # Frontend action: Cart empty-state checks
     def is_empty(self):
         return len(self.items) == 0
     
@@ -100,7 +108,6 @@ class Database:
         if not raw:
             return DEFAULT_CATEGORY
 
-        # Accept canonical labels case-insensitively.
         canonical_lookup = {name.lower(): name for name in MENU_CATEGORIES}
         lowered = raw.lower()
         if lowered in canonical_lookup:
@@ -259,6 +266,7 @@ class Database:
             print(f"Error adding default data: {err}")
             self.connection.rollback()
     
+    # Frontend action: Login button
     def verify_staff_login(self, username, password):
         if not self.connection:
             print("No database connection")
@@ -277,6 +285,7 @@ class Database:
             print(f"Login verification failed: {err}")
             return False
     
+    # Frontend action: Customer menu load (available items only)
     def get_menu(self):
         if not self.connection:
             print("No database connection")
@@ -294,6 +303,7 @@ class Database:
             print(f"Failed to get menu: {err}")
             return []
     
+    # Frontend action: Checkout/Place order button
     def save_new_order(self, order_type, cart_items, total_amount, customer_name="Guest"):
         if not self.connection:
             print("No database connection")
@@ -330,6 +340,7 @@ class Database:
             self.connection.rollback()
             return None
     
+    # Frontend action: Queue page refresh (active orders)
     def get_active_orders(self):
         if not self.connection:
             print("No database connection")
@@ -351,6 +362,7 @@ class Database:
             print(f"Failed to get active orders: {err}")
             return []
     
+    # Frontend action: Inventory page load (includes unavailable items)
     def get_all_menu_items(self):
         if not self.connection:
             print("No database connection")
@@ -364,6 +376,7 @@ class Database:
             print(f"Failed to get menu items: {err}")
             return []
     
+    # Frontend action: Inventory add item button
     def add_menu_item(self, name, description, price, category, is_available=True, image_path=None):
         if not self.connection:
             print("No database connection")
@@ -386,6 +399,7 @@ class Database:
             self.connection.rollback()
             return False
     
+    # Frontend action: Inventory update/save button
     def update_menu_item(self, item_id, **kwargs):
         if not self.connection:
             print("No database connection")
@@ -426,9 +440,11 @@ class Database:
             self.connection.rollback()
             return False
     
+    # Frontend action: Inventory delete button (soft delete)
     def delete_menu_item(self, item_id):
         return self.update_menu_item(item_id, is_available=False)
     
+    # Frontend action: Fetch single item details by id
     def get_menu_item_by_id(self, item_id):
         if not self.connection:
             print("No database connection")
@@ -443,6 +459,7 @@ class Database:
             print(f"Failed to get menu item: {err}")
             return None
     
+    # Frontend action: Order details modal / Track order button
     def get_order_details(self, order_id):
         if not self.connection:
             print("No database connection")
@@ -474,6 +491,7 @@ class Database:
             print(f"Failed to get order details: {err}")
             return None
     
+    # Frontend action: Set Preparing/Completed/Cancelled status buttons
     def update_order_status(self, order_id, new_status):
         if not self.connection:
             print("No database connection")
@@ -512,9 +530,11 @@ class Database:
             self.connection.rollback()
             return False
     
+    # Frontend action: Cancel order shortcut button
     def cancel_order(self, order_id):
         return self.update_order_status(order_id, 'Cancelled')
     
+    # Frontend action: Orders history/list page refresh
     def get_all_orders(self, limit=50):
         if not self.connection:
             print("No database connection")
@@ -532,6 +552,7 @@ class Database:
             print(f"Failed to get orders: {err}")
             return []
     
+    # Frontend action: Filter orders by status tabs/dropdown
     def get_orders_by_status(self, status):
         if not self.connection:
             print("No database connection")
@@ -545,6 +566,7 @@ class Database:
             print(f"Failed to get orders: {err}")
             return []
     
+    # Frontend action: Category dropdown options load
     def get_categories(self):
         if not self.connection:
             print("No database connection")
@@ -556,6 +578,7 @@ class Database:
             print(f"Failed to get categories: {err}")
             return []
     
+    # Frontend action: Search bar for menu items
     def search_menu_items(self, search_term):
         if not self.connection:
             print("No database connection")
