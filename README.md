@@ -178,5 +178,8 @@ cart = Cart()
 - If images are missing, confirm `src/no-image.jpg` exists in project root.
 - If Qt dependencies fail to import, reactivate `.venv` and reinstall with `python -m pip install -r requirements.txt`.
 
+## Added Front-End using PySide6
+- A new file `kiosk_frontend_qt.py` has been added which implements a designed GUI for the backend. However the back_end is still headless or agnostic to the front-end, so the backend can be used with any front-end framework.
+
 ## License
 Educational project for college coursework.
