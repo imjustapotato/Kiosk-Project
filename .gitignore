@@ -9,6 +9,7 @@
 !README.md
 !requirements.txt
 !database_setup.sql
+!kiosk_frontend_qt.py
 
 
 # Keep runtime image assets
@@ -23,7 +24,7 @@ kiosk_backend_documentation.md
 SMOKE_TEST_REPORT.md
 PHASE_G_CHECKLIST.md
 mapping.md
-!kiosk_frontend_qt.py
+
 
 # Common local/dev artifacts
 __pycache__/
