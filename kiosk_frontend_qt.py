@@ -1390,6 +1390,11 @@ class KioskQtApp(QMainWindow):
         if self.admin_view == "inventory":
             self.refresh_inventory_view()
 
+    def _invalidate_menu_view_signatures(self):
+        self._last_inventory_view_signature = None
+        self._last_manual_view_signature = None
+        self._last_customer_view_signature = None
+
     def _clear_inventory_add_form(self):
         self.inventory_name_input.clear()
         self.inventory_desc_input.clear()
@@ -1471,6 +1476,7 @@ class KioskQtApp(QMainWindow):
         if item_id:
             QMessageBox.information(self, "Added", f"Item #{item_id} added.")
             self._clear_inventory_add_form()
+            self._invalidate_menu_view_signatures()
             self.refresh_inventory_view()
         else:
             QMessageBox.critical(self, "Failed", "Could not add item.")
@@ -1509,6 +1515,7 @@ class KioskQtApp(QMainWindow):
         ok = self.db.update_menu_item(item_id, **update_fields)
         if ok:
             QMessageBox.information(self, "Updated", f"Item #{item_id} updated.")
+            self._invalidate_menu_view_signatures()
             self.refresh_inventory_view()
         else:
             QMessageBox.critical(self, "Failed", f"Could not update item #{item_id}.")
@@ -1521,6 +1528,7 @@ class KioskQtApp(QMainWindow):
         ok = self.db.delete_menu_item(item_id)
         if ok:
             QMessageBox.information(self, "Deleted", f"Item #{item_id} marked unavailable.")
+            self._invalidate_menu_view_signatures()
             self.refresh_inventory_view()
         else:
             QMessageBox.critical(self, "Failed", f"Could not delete item #{item_id}.")
